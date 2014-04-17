@@ -1,6 +1,0 @@
-<module>
-    <inherits name="org.cruxframework.crux.core.Crux"/>
-
-	<!-- Specify the app entry point class.                   -->
-	<entry-point class='org.cruxframework.crux.plugin.errorhandler.client.SuperErrorHandler'/>
-</module>
