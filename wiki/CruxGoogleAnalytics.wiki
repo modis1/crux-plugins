@@ -1,13 +1,25 @@
-#summary One-sentence summary of this page.
+#Plugin Crux Google Analytics.
 
 = Introduction =
 
-Add your content here.
+This plugin enable Crux applications to use Google Analytics.
 
+== Install ==
 
-= Details =
+* Add at POM.XML
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+ <dependency>
+   <groupId>org.cruxframework</groupId>
+   <artifactId>google-analytics</artifactId>
+   <version>1.0.0</version>
+ </dependency>
+
+* Add at file "seuprojeto.gwt.xml" the line
+
+  <inherits name='org.cruxframework.crux.plugin.google.analytics.GoogleAnalytics' />
+
+== Use ==
+
+* Loading the application, call method _init(userAccount)_ from class GoogleAnalytics at Controller. The _userAccount_ is the number of your Google Analytics acount. This method need be called only once.
+
+* Every page or action need to call the method of the API to regiter the action. A new page visited need call the _pageview_.
