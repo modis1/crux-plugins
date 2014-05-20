@@ -15,15 +15,16 @@
  */
 package org.cruxframework.crux.plugin.errorhandler.server.dao;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,7 +44,15 @@ public class LoggingErrorDAO
 		return getErrorLogFile().delete();
 	}
 
-	public static void overwrite(List<Throwable> throwables)
+	public static void main(String[] args) 
+	{
+		System.setProperty("java.io.tmpdir", "F:\\crux_compilation");
+
+		ArrayList<Throwable> read = read();
+		read.isEmpty();
+	}
+
+	public static void overwrite(ArrayList<Throwable> throwables)
 	{
 		ObjectOutputStream oos = null;
 		FileOutputStream fout = null;
@@ -73,7 +82,7 @@ public class LoggingErrorDAO
 
 	public static void append(Throwable throwable)
 	{
-		List<Throwable> actualThrowables = read();
+		ArrayList<Throwable> actualThrowables = read();
 
 		if (actualThrowables == null)
 		{
@@ -90,6 +99,37 @@ public class LoggingErrorDAO
 		overwrite(actualThrowables);
 	}
 
+	private static boolean isEmptyFile(File file)
+	{
+		if(!file.exists())
+		{
+			return true;
+		}
+
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(file));
+			if (br.readLine() == null) 
+			{
+				return true;
+			}
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		} finally
+		{
+			try 
+			{
+				br.close();
+			} catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+
 	@SuppressWarnings("unchecked")
 	public static ArrayList<Throwable> read()
 	{
@@ -97,9 +137,22 @@ public class LoggingErrorDAO
 		FileInputStream fins = null;
 		try
 		{
-			fins = new FileInputStream(getErrorLogFile());
-			logger.info("Reading exception from: " + getErrorLogFile().getAbsolutePath());
+			File file = getErrorLogFile();
+			logger.info("Reading exception from: " + file.getAbsolutePath());
+
+			if(isEmptyFile(file))
+			{
+				return null;
+			}
+			fins = new FileInputStream(file);
 			oos = new ObjectInputStream(fins);
+
+			Object t = null;
+			if((t = oos.readObject()) != null) 
+			{
+				return (ArrayList<Throwable>) t;
+			}
+
 			return (ArrayList<Throwable>) oos.readObject();
 		}
 		catch (FileNotFoundException e)
@@ -134,6 +187,18 @@ public class LoggingErrorDAO
 		{
 			String tmpDir = FileUtils.getTempDir();
 			errorLogFile = new File(tmpDir + "deferredbindingexception");
+
+			if(isEmptyFile(errorLogFile))
+			{
+				try 
+				{
+					errorLogFile.createNewFile();
+				} catch (IOException e) 
+				{
+					e.printStackTrace();
+				}
+			}
+
 		}
 
 		return errorLogFile;
