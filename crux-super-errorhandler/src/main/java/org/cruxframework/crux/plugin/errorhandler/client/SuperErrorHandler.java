@@ -16,15 +16,15 @@
 package org.cruxframework.crux.plugin.errorhandler.client;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
+import org.cruxframework.crux.core.client.Crux;
+import org.cruxframework.crux.core.client.errors.ErrorHandlerImpl;
 import org.cruxframework.crux.plugin.errorhandler.client.remote.ErrorHandlerService;
 import org.cruxframework.crux.plugin.errorhandler.client.remote.ErrorHandlerServiceAsync;
 import org.cruxframework.crux.plugin.errorhandler.client.resource.SuperErrorHandlerResource;
 
-import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -32,76 +32,31 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
 /**
- *<pre>
-   {@code
-   //In order to make it work, insert this in a client pom project: 
-   <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>aspectj-maven-plugin</artifactId>
-        <version>1.5</version>
-        <configuration>
-            <weaveDependencies>
-                <weaveDependency>
-                     <groupId>org.cruxframework</groupId>
-                     <artifactId>super-error-handler</artifactId>
-                </weaveDependency>
-                <weaveDependency>
-                    <groupId>com.google.gwt</groupId>
-                    <artifactId>gwt-dev</artifactId>
-                </weaveDependency>
-            </weaveDependencies>
-            <complianceLevel>1.6</complianceLevel>
-            <source>1.6</source>
-            <target>1.6</target>
-            <Xlint>ignore</Xlint>
-        </configuration>
-        <executions>
-            <execution>
-                <phase>process-sources</phase>
-                <goals>
-                    <goal>compile</goal>
-                </goals>
-            </execution>
-        </executions>
-    </plugin>
-    }
-    </pre>
- * 
  * @author Samuel Cardoso
  *
  */
-public class SuperErrorHandler implements EntryPoint
+public class SuperErrorHandler extends ErrorHandlerImpl
 {
-	@Override
-    public void onModuleLoad()
-    {
-		final ErrorHandlerServiceAsync errorHandlerService = GWT.create(ErrorHandlerService.class);
-		final SuperErrorHandlerResource resources = GWT.create(SuperErrorHandlerResource.class);
-		resources.css().ensureInjected();
-		
-		Scheduler.get().scheduleFixedDelay(new RepeatingCommand()
-		{
-			@Override
-			public boolean execute()
-			{
-				checkErrorsOnServer(errorHandlerService, resources);
-				return true;
-			}
-		}, 10000);
-    }
-
-	private void checkErrorsOnServer(final ErrorHandlerServiceAsync errorHandlerService, final SuperErrorHandlerResource resources)
+	private static Logger logger = Logger.getLogger(Crux.class.getName());
+	
+	private void checkErrorsOnServer(final ErrorHandlerServiceAsync errorHandlerService, final SuperErrorHandlerResource resources, final Throwable originalError)
     {
         errorHandlerService.getError(new AsyncCallback<ArrayList<Throwable>>() 
 		{
 			@Override
 			public void onSuccess(ArrayList<Throwable> result) 
 			{
-				if(result == null || result.isEmpty())
+				if(result == null)
 				{
-					return;
+					result = new ArrayList<Throwable>();
 				}
 				
+				if(originalError != null)
+				{
+					result.add(result.size(), originalError);
+				}
+				
+				FlowPanel errorContainer = new FlowPanel();
 				for(Throwable throwable : result)
 				{
 					FlowPanel errorMsgContainer = new FlowPanel();
@@ -129,8 +84,10 @@ public class SuperErrorHandler implements EntryPoint
 						errorMsgContainerBody.add(labelStack);
 						errorMsgContainer.add(errorMsgContainerBody);
 					}
-					Document.get().getBody().appendChild(errorMsgContainer.getElement());
+					errorContainer.add(errorMsgContainer);
 				}
+				
+				Document.get().getBody().appendChild(errorContainer.getElement());
 			}
 			
 			@Override
@@ -140,4 +97,14 @@ public class SuperErrorHandler implements EntryPoint
 			}
 		});
     }
+
+	@Override
+	public void handleError(String errorMessage, Throwable t) 
+	{
+		logger.info("error detected.");
+		final ErrorHandlerServiceAsync errorHandlerService = GWT.create(ErrorHandlerService.class);
+		final SuperErrorHandlerResource resources = GWT.create(SuperErrorHandlerResource.class);
+		resources.css().ensureInjected();
+		checkErrorsOnServer(errorHandlerService, resources, t);		
+	}
 }
