@@ -14,7 +14,7 @@ This plugin enable Zoom in/out feature that can be applied to any Widget inside 
  </dependency>
 }}}
 
-* Add at file <nowiki>"PROJECT_NAME.gwt.xml"</nowiki> the following line
+* Add at file <pre>"PROJECT_NAME.gwt.xml"</pre> the following line
 
 {{{
   <inherits name='org.cruxframework.plugins.zoomingtools.CruxZoomingTools' />
