@@ -14,7 +14,7 @@ This plugin enable Crux applications to use Google Analytics.
  <dependency>
    <groupId>org.cruxframework</groupId>
    <artifactId>crux-google-analytics</artifactId>
-   <version>1.0.0</version>
+   <version>...</version>
  </dependency>
 }}}
 
