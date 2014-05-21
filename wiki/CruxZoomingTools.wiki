@@ -2,6 +2,10 @@
 
 This plugin enable Zoom in/out feature that can be applied to any Widget inside a view or page.
 
+== Compatibility ==
+
+* GWT +2.5.1
+
 == Install ==
 
 * Add at POM.XML
