@@ -4,7 +4,7 @@ This plugin enables Crux applications to display deferred binding error messages
 
 == Compatibility ==
 
-* Crux +5.1.0
+* Crux 5.1.0
 
 == Install ==
 
@@ -29,6 +29,8 @@ This plugin enables Crux applications to display deferred binding error messages
 <code>
 org.cruxframework.crux.plugin.errorhandler.launcher.SuperErrorHandlerInstrumentator.main();
 </code>
+
+* This procedure will create a gwt-dev backup jar in the same folder of the instrumented jar. If you want to revert the operation, just replace the new file for the backup one.
 
 === Use ===
 
