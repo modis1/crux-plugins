@@ -1,6 +1,6 @@
 = Introduction =
 
-This plugin enable Crux applications to use Google Analytics.
+This plugin enables Crux applications to display deferred binding error messages in client side. Using this, users will not have to inspect DevMode log in order to find for an error, they will be displayed right inside a Crux view or page.
 
 == Install ==
 
@@ -9,19 +9,23 @@ This plugin enable Crux applications to use Google Analytics.
 {{{
  <dependency>
    <groupId>org.cruxframework</groupId>
-   <artifactId>google-analytics</artifactId>
-   <version>1.0.0</version>
+   <artifactId>crux-super-errorhandler</artifactId>
+   <version>...</version>
  </dependency>
 }}}
 
-* Add at file "seuprojeto.gwt.xml" the line
+* Add at file <pre>"<<PROJECT_NAME>>.gwt.xml"</pre> the following line
 
 {{{
-  <inherits name='org.cruxframework.crux.plugin.google.analytics.GoogleAnalytics' />
+  <inherits name="org.cruxframework.crux.plugin.errorhandler.SuperErrorHandler"/>
 }}}
+
+* Run instrumentation procedure. This will allow Crux classes to be injected in the gwt-dev jar:
+
+<code>
+org.cruxframework.crux.plugin.errorhandler.launcher.SuperErrorHandlerInstrumentator.main();
+</code>
 
 === Use ===
 
- * Loading the application, call method _init(userAccount)_ from class GoogleAnalytics at Controller. The _userAccount_ is the number of your Google Analytics acount. This method need be called only once.
-
- * Every page or action need to call the method of the API to regiter the action. A new page visited need call the _pageview_.
+ * Just open your application and start coding. Once an error occurs it will be displayed right on your screen.
