@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.cruxframework.crux.gadget.server.dispatch;
+package org.cruxframework.crux.plugin.gadget.server.dispatch;
 
 import java.io.IOException;
 
