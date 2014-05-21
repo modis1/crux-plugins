@@ -33,7 +33,7 @@ This plugin enable Zoom in/out feature that can be applied to any Widget inside 
   Zoom.getInstance().out();
 </code>
 
-* For a more generic approach you can add this feature to all of your dialogs (this will be available only on crux versions up to 5.1.1). Let's take an example:
+* For a more generic approach you can add this feature to all of your dialogs (this will be available for crux versions up to 5.1.1). Let's take an example:
 
 <code>
 
