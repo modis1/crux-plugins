@@ -66,6 +66,7 @@ ConfirmDialog.addDefaultOpenHandler(new OpenHandler<ConfirmDialog>()
     Zoom.getInstance().to(event.getTarget().asWidget());
   }
 });
+
 MessageDialog.addDefaultCloseHandler(new CloseHandler<MessageDialog>()
 {
   @Override
