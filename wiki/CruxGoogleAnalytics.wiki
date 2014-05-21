@@ -2,6 +2,10 @@
 
 This plugin enable Crux applications to use Google Analytics.
 
+== Compatibility ==
+
+* Crux +5.1.0
+
 == Install ==
 
 * Add at POM.XML
