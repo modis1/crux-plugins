@@ -12,7 +12,7 @@ This plugin enables Crux applications to display deferred binding error messages
 
 {{{
  <dependency>
-   <groupId>org.cruxframework</groupId>
+   <groupId>org.cruxframework.plugin</groupId>
    <artifactId>crux-super-errorhandler</artifactId>
    <version>...</version>
  </dependency>
