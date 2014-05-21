@@ -1,0 +1,9 @@
+<module>
+    <inherits name="org.cruxframework.crux.core.Crux"/>
+    
+    <!-- Specify the default implementation to ErrorHandler.-->
+    <replace-with class="org.cruxframework.crux.plugin.errorhandler.client.SuperErrorHandler">
+        <when-type-assignable class="org.cruxframework.crux.core.client.errors.ErrorHandler" />
+    </replace-with>
+    
+</module>
