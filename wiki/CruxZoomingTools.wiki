@@ -28,7 +28,7 @@ This plugin enable Zoom in/out feature that can be applied to any Widget inside 
 Zoom.getInstance().to(myWidget);
 </code>
 
-* ... or, if you want, you also can do a more generic approach like adding this feature to all of your dialogs. Doing this, 
+* For a more generic approach you can add this feature to all of your dialogs. Let's take an example:
 
 <code>
 
