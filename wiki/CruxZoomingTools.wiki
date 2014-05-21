@@ -14,7 +14,7 @@ This plugin enable Zoom in/out feature that can be applied to any Widget inside 
  </dependency>
 }}}
 
-* Add at file "<PROJECT_NAME>.gwt.xml" the following line
+* Add at file <nowiki>"PROJECT_NAME.gwt.xml"</nowiki> the following line
 
 {{{
   <inherits name='org.cruxframework.plugins.zoomingtools.CruxZoomingTools' />
@@ -23,62 +23,63 @@ This plugin enable Zoom in/out feature that can be applied to any Widget inside 
 === Use ===
 
 * If you want to apply this feature for a Widget, you can use as:
+
 <code>
 Zoom.getInstance().to(myWidget);
 </code>
 
+* ... or, if you want, you also can do a more generic approach like adding this feature to all of your dialogs. Doing this, 
 
-* ... or, if you want, you also can do a more generic approach like adding this feature in ev
 <code>
 
 AbstractDialogBox.addDefaultCloseHandler(new CloseHandler<PopupPanel>()
-		{
-			@Override
-			public void onClose(CloseEvent<PopupPanel> event)
-			{
-				Zoom.getInstance().out();
-			}
-		});
-		AbstractDialogBox.addDefaultOpenHandler(new OpenHandler<PopupPanel>()
-		{
-			@Override
-			public void onOpen(final OpenEvent<PopupPanel> event)
-			{
-				Zoom.getInstance().to(event.getTarget());
-			}
-		});
+{
+  @Override
+  public void onClose(CloseEvent<PopupPanel> event)
+  {
+    Zoom.getInstance().out();
+  }
+});
+AbstractDialogBox.addDefaultOpenHandler(new OpenHandler<PopupPanel>()
+{
+  @Override
+  public void onOpen(final OpenEvent<PopupPanel> event)
+  {
+    Zoom.getInstance().to(event.getTarget());
+  }
+});
 
-		ConfirmDialog.addDefaultCloseHandler(new CloseHandler<ConfirmDialog>()
-		{
-			@Override
-			public void onClose(CloseEvent<ConfirmDialog> event)
-			{
-				Zoom.getInstance().out();
-			}
-		});
-		ConfirmDialog.addDefaultOpenHandler(new OpenHandler<ConfirmDialog>()
-		{
-			@Override
-			public void onOpen(final OpenEvent<ConfirmDialog> event)
-			{
-				Zoom.getInstance().to(event.getTarget().asWidget());
-			}
-		});
-		MessageDialog.addDefaultCloseHandler(new CloseHandler<MessageDialog>()
-		{
-			@Override
-			public void onClose(CloseEvent<MessageDialog> event)
-			{
-				Zoom.getInstance().out();
-			}
-		});
-		MessageDialog.addDefaultOpenHandler(new OpenHandler<MessageDialog>()
-		{
-			@Override
-			public void onOpen(final OpenEvent<MessageDialog> event)
-			{
-				Zoom.getInstance().to(event.getTarget().asWidget());
-			}
-		});
+ConfirmDialog.addDefaultCloseHandler(new CloseHandler<ConfirmDialog>()
+{
+  @Override
+  public void onClose(CloseEvent<ConfirmDialog> event)
+  {
+    Zoom.getInstance().out();
+  }
+});
+ConfirmDialog.addDefaultOpenHandler(new OpenHandler<ConfirmDialog>()
+{
+  @Override
+  public void onOpen(final OpenEvent<ConfirmDialog> event)
+  {
+    Zoom.getInstance().to(event.getTarget().asWidget());
+  }
+});
+MessageDialog.addDefaultCloseHandler(new CloseHandler<MessageDialog>()
+{
+  @Override
+  public void onClose(CloseEvent<MessageDialog> event)
+  {
+    Zoom.getInstance().out();
+  }
+});
+MessageDialog.addDefaultOpenHandler(new OpenHandler<MessageDialog>()
+{
+  @Override
+  public void onOpen(final OpenEvent<MessageDialog> event)
+  {
+    Zoom.getInstance().to(event.getTarget().asWidget());
+  }
+});
 
 </code>
