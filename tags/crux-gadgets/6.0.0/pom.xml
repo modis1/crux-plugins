@@ -6,13 +6,13 @@
 	<name>Crux Gadgets - Development</name>
 	<version>6.0.0</version>
 	<description>Crux Gadgets - Development components</description>
-    
-    <parent>
-        <groupId>org.cruxframework</groupId>
-        <artifactId>crux-core</artifactId>
-        <version>1.0.0</version>
-    </parent>
-    
+
+	<parent>
+		<groupId>org.cruxframework</groupId>
+		<artifactId>crux-core</artifactId>
+		<version>5.1.0</version>
+	</parent>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.cruxframework</groupId>
