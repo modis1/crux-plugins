@@ -3,20 +3,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cruxframework.plugin</groupId>
 	<artifactId>crux-super-errorhandler</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>Super Error Handler</name>
 	<description>Error handler for rebind problems on Crux</description>
 
-    <parent>
-        <groupId>org.cruxframework</groupId>
-        <artifactId>crux-parent</artifactId>
-        <version>1.0.0</version>
-    </parent>
+	<parent>
+		<groupId>org.cruxframework</groupId>
+		<artifactId>crux-parent</artifactId>
+		<version>1.0.0</version>
+	</parent>
 
-    <properties>
-        <cruxVersion>5.1.0</cruxVersion>
-    </properties>
-    
+	<properties>
+		<cruxVersion>5.1.0</cruxVersion>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.cruxframework</groupId>
