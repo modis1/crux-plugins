@@ -1,4 +1,6 @@
-= Introduction =
+= Crux GoogleAnalytics Plugin = 
+
+== Introduction ==
 
 This plugin enable Crux applications to use Google Analytics.
 
