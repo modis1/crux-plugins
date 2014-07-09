@@ -1,4 +1,6 @@
-= Introduction =
+= Crux Zooming Tools Plugin =
+
+== Introduction ==
 
 This plugin enable Zoom in/out feature that can be applied to any Widget inside a view or page.
 
