@@ -1,4 +1,6 @@
-= Introduction =
+= Crux Bootstrap Plugin =
+
+== Introduction ==
 
 This plugin provides access to all Twitter Bootstrap's CSS and Javascript classes. Using these styles you can stylize any HTML element and a great amount of Crux's widgets.
 
