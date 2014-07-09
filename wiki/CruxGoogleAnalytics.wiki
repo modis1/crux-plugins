@@ -1,4 +1,4 @@
-= Crux GoogleAnalytics Plugin = 
+= Crux Google Analytics Plugin = 
 
 == Introduction ==
 
