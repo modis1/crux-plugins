@@ -1,4 +1,6 @@
-= Introduction =
+= Crux Super Error Handler Plugin = 
+
+== Introduction ==
 
 This plugin enables Crux applications to display deferred binding error messages in client side. Using this, users will not have to inspect DevMode log in order to find for an error, they will be displayed right inside a Crux view or page.
 
