@@ -23,4 +23,5 @@ This plugin allow Crux applications to host REST services on Google App Engine.
 * Add at file <pre>"Crux.properties"</pre> the following line
 
 {{{
-restServiceResourceStateHandler=org.cruxframework.crux.plugin.appengine.rest.AppengineResourceStateHandler}}}
+restServiceResourceStateHandler=org.cruxframework.crux.plugin.appengine.rest.AppengineResourceStateHandler
+}}}
