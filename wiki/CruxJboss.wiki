@@ -23,14 +23,14 @@ This plugin enable Jboss Application server to be used to debug Crux application
 * Add at file <pre>"web.xml"</pre> the following line
 
 {{{
-	<listener>
-		<listener-class>org.cruxframework.crux.plugin.jboss.listener.JNDIRegistryListener</listener-class>
-	</listener>
+  <listener>
+       <listener-class>org.cruxframework.crux.plugin.jboss.listener.JNDIRegistryListener</listener-class>
+  </listener>
 }}}
 
 Just before the other Crux Listener.
 {{{
-	<listener>
-		<listener-class>org.cruxframework.crux.core.server.InitializerListener</listener-class>
-	</listener>
+  <listener>
+       <listener-class>org.cruxframework.crux.core.server.InitializerListener</listener-class>
+  </listener>
 }}}
