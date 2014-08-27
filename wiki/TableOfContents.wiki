@@ -1,11 +1,15 @@
 ==Contents==
 
 <table>
+
 <tr>
-<td>*[CruxJboss Crux Jboss]*</td>
+  <td>*[CruxJboss Crux Jboss]*</td>
 </tr>
 <tr>
-<td>*[Appengine Crux Appengine]*</td>
+  <td>*[CruxAppEngine Crux Appengine]*</td>
+</tr>
+<tr>
+  <td>*[CruxZoomingTools Crux Zooming Tools]*</td>
 </tr>
 
 </table>
