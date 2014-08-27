@@ -11,5 +11,12 @@
 <tr>
   <td>*[CruxZoomingTools Crux Zooming Tools]*</td>
 </tr>
+<tr>
+  <td>*[CruxBootstrap Crux Bootstrap]*</td>
+</tr>
+
+<tr>
+  <td>*[CruxGadgets Crux Gadgets]*</td>
+</tr>
 
 </table>
