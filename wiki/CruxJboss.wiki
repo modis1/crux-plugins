@@ -1,5 +1,3 @@
-#sidebar TableOfContents
-
 = Crux Google Analytics Plugin = 
 
 == Introduction ==
