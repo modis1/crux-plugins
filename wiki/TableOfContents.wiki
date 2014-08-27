@@ -2,10 +2,10 @@
 
 <table>
 <tr>
-<td>*[Milestones Milestones Crux 5]*</td>
+<td>*[CruxJboss Crux Jboss]*</td>
 </tr>
 <tr>
-<td>*[UserManual User Manual Crux 4]*</td>
+<td>*[Appengine Crux Appengine]*</td>
 </tr>
 
 </table>
