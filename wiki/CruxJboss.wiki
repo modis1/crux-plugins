@@ -6,7 +6,7 @@ This plugin enable Jboss Application server to be used to debug Crux application
 
 == Compatibility ==
 
-* Crux +5.3-SNAPSHOT
+* Crux +5.2-SNAPSHOT
 
 == Install ==
 
