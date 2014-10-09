@@ -3,35 +3,35 @@
 function setupWaitForBodyLoad(callback) {
   // Provides the isBodyLoaded() function
   __IS_BODY_LOADED__
+  
+  var bodyDone = isBodyLoaded();
 
-  var bodyDone = false;
-
-  if (isBodyLoaded()) {
-    bodyDone = true;
+  if (bodyDone) {
     callback();
+    return;
   }
 
   // If the page is not already loaded, setup some listeners and timers to
   // detect when it is done.
-  var onBodyDoneTimerId;
-  function onBodyDone() {
+	function onBodyDone() {
     if (!bodyDone) {
       bodyDone = true;
       callback();
-// __MODULE_STYLES_BEGIN__
-     // Style resources are injected here to prevent operation aborted errors on ie
-// __MODULE_STYLES_END__
 
-// __MODULE_SCRIPTS_BEGIN__
-  // Script resources are injected here
-// __MODULE_SCRIPTS_END__
-
+      if ($doc.removeEventListener) {
+        $doc.removeEventListener("DOMContentLoaded", onBodyDone, false);
+      }
       if (onBodyDoneTimerId) {
         clearInterval(onBodyDoneTimerId);
       }
     }
   }
 
+  // For everyone that supports DOMContentLoaded.
+  if ($doc.addEventListener) {
+    $doc.addEventListener("DOMContentLoaded", onBodyDone, false);
+  }
+  
   $wnd.gadgets.util.registerOnLoadHandler(function() {
       onBodyDone();
   });
