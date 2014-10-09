@@ -52,6 +52,7 @@ public final class GadgetLinker extends CrossSiteIframeLinker
 	private static final String GADGET_PROCESS_METAS_JS = "org/cruxframework/crux/plugin/gadget/linker/processMetas.js";
 	private static final String GADGET_WAIT_FOR_BODY_LOADED_JS = "org/cruxframework/crux/plugin/gadget/linker/waitForBodyLoaded.js";
 	private static final String GADGET_SET_LOCALE_JS = "org/cruxframework/crux/plugin/gadget/linker/setGadgetLocale.js";
+	private static final String GADGET_PROPERTIES_JS = "org/cruxframework/crux/plugin/gadget/linker/properties.js";
 	private static final String GADGET_COMPUT_URL_FOR_RESOURCE_JS = "org/cruxframework/crux/plugin/gadget/linker/computeUrlForGadgetResource.js";
 	private static final String HANGOUT_GADGET_COMPUT_URL_FOR_RESOURCE_JS = "org/cruxframework/crux/plugin/gadget/linker/computeUrlForHangoutGadgetResource.js";
 
@@ -195,6 +196,15 @@ public final class GadgetLinker extends CrossSiteIframeLinker
 	protected String getJsSetGadgetLocale(LinkerContext context)
 	{
 		return GADGET_SET_LOCALE_JS;
+	}
+	
+	/**
+	 * Gets the setLocale template for properties
+	 */
+	@Override
+	protected String getJsProperties(LinkerContext context) 
+	{
+		return GADGET_PROPERTIES_JS;
 	}
 	
 	/**
