@@ -30,6 +30,9 @@ import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
 import com.google.gwt.core.ext.linker.Shardable;
 import com.google.gwt.core.linker.CrossSiteIframeLinker;
+import com.google.gwt.dev.About;
+import com.google.gwt.dev.util.DefaultTextOutput;
+import com.google.gwt.dev.util.TextOutput;
 
 /**
  * A Gadget does not use the {@code .nocache.js} file for the bootstrap. All bootstrap code is inserted
@@ -67,6 +70,58 @@ public final class GadgetLinker extends CrossSiteIframeLinker
 		return "Crux Gadget";
 	}
 
+	@Override
+  protected String getModulePrefix(TreeLogger logger, LinkerContext context, String strongName)
+    throws UnableToCompleteException {
+    TextOutput out = new DefaultTextOutput(context.isOutputCompact());
+
+    // $wnd is the main window that the GWT code will affect and also the
+    // location where the bootstrap function was defined. In iframe-based linkers,
+    // $wnd is set to window.parent. Usually, in others, $wnd = window.
+    // By default, $wnd is not set when the module starts, but a replacement for
+    // installLocationIframe.js may set it.
+
+    out.print("var $wnd = window;");
+    out.newlineOpt();
+    out.print("var __gwtModuleFunction = $wnd." + context.getModuleFunctionName() + ";");
+    out.newlineOpt();
+    out.print("var $sendStats = __gwtModuleFunction.__sendStats;");
+    out.newlineOpt();
+    out.print("$sendStats('moduleStartup', 'moduleEvalStart');");
+    out.newlineOpt();
+    out.print("var $gwt_version = \"" + About.getGwtVersionNum() + "\";");
+    out.newlineOpt();
+    out.print("var $strongName = '" + strongName + "';");
+    out.newlineOpt();
+    out.print("var $doc = $wnd.document;");
+
+    // The functions for runAsync are set up in the bootstrap script so they
+    // can be overriden in the same way as other bootstrap code is, however
+    // they will be called from, and expected to run in the scope of the GWT code
+    // (usually an iframe) so, here we set up those pointers.
+    out.print("function __gwtStartLoadingFragment(frag) {");
+    out.newlineOpt();
+    String fragDir = getFragmentSubdir(logger, context) + '/';
+    out.print("var fragFile = '" + fragDir + "' + $strongName + '/' + frag + '" + FRAGMENT_EXTENSION + "';");
+    out.newlineOpt();
+    out.print("return __gwtModuleFunction.__startLoadingFragment(fragFile);");
+    out.newlineOpt();
+    out.print("}");
+    out.newlineOpt();
+    out.print("function __gwtInstallCode(code) {return __gwtModuleFunction.__installRunAsyncCode(code);}");
+    out.newlineOpt();
+
+    // Even though we call the $sendStats function in the code written in this
+    // linker, some of the compilation code still needs the $stats and
+    // $sessionId
+    // variables to be available.
+    out.print("var $stats = $wnd.__gwtStatsEvent ? function(a) {return $wnd.__gwtStatsEvent(a);} : null;");
+    out.newlineOpt();
+    out.print("var $sessionId = $wnd.__gwtStatsSessionId ? $wnd.__gwtStatsSessionId : null;");
+    out.newlineOpt();
+
+    return out.toString();
+  }
 	
 	/**
 	 * We need to save the original artifactSet received here to be able to re-emit the selection 
