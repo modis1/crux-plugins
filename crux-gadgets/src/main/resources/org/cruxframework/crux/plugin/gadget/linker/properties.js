@@ -60,5 +60,15 @@
   };
 
   __MODULE_FUNC__.__computePropValue = computePropValue;
+  
   //GADGET MOD
-  //$wnd.__gwt_activeModules["__MODULE_NAME__"].bindings = __MODULE_FUNC__.__getPropMap;
+  try
+  {
+	  $wnd.__gwt_activeModules["__MODULE_NAME__"].bindings = __MODULE_FUNC__.__getPropMap;  
+  } catch(err)
+  {
+	  if(console)
+	  {
+	  	console.log(err);  
+	  }
+  }

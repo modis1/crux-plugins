@@ -81,7 +81,14 @@ public final class GadgetLinker extends CrossSiteIframeLinker
     // By default, $wnd is not set when the module starts, but a replacement for
     // installLocationIframe.js may set it.
 
-    out.print("var $wnd = window;");
+    //BEGIN GADGET GWT 2.6.1 CHANGE
+    out.print("var $wnd;");
+    out.newlineOpt();
+    out.print("if($wnd && $wnd." + context.getModuleFunctionName() + ") { $wnd = $wnd; } "
+    		+ "else if(window." + context.getModuleFunctionName() + "){ $wnd = window; } "
+    				+ "else { $wnd = window.parent; }");
+    //END GADGET GWT 2.6.1 CHANGE
+    
     out.newlineOpt();
     out.print("var __gwtModuleFunction = $wnd." + context.getModuleFunctionName() + ";");
     out.newlineOpt();
