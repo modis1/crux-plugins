@@ -45,6 +45,9 @@
 	<replace-with class="org.cruxframework.crux.plugin.gadget.client.features.impl.PubsubFeatureImpl">
 	  <when-type-is class="org.cruxframework.crux.plugin.gadget.client.features.PubsubFeature"/>
 	</replace-with>
+	<replace-with class="org.cruxframework.crux.plugin.gadget.client.features.impl.Pubsub2FeatureImpl">
+      <when-type-is class="org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature"/>
+    </replace-with>
 	<replace-with class="org.cruxframework.crux.plugin.gadget.client.features.impl.MiniMessageFeatureImpl">
 	  <when-type-is class="org.cruxframework.crux.plugin.gadget.client.features.MiniMessageFeature"/>
 	</replace-with>
