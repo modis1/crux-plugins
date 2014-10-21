@@ -24,6 +24,7 @@ import org.cruxframework.crux.plugin.gadget.client.features.AdsFeature;
 import org.cruxframework.crux.plugin.gadget.client.features.DynamicHeightFeature;
 import org.cruxframework.crux.plugin.gadget.client.features.GoogleAnalyticsFeature;
 import org.cruxframework.crux.plugin.gadget.client.features.MiniMessageFeature;
+import org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature;
 import org.cruxframework.crux.plugin.gadget.client.features.PubsubFeature;
 import org.cruxframework.crux.plugin.gadget.client.features.RpcFeature;
 import org.cruxframework.crux.plugin.gadget.client.features.SetPrefsFeature;
@@ -69,6 +70,7 @@ public interface GadgetFeature
 		minimessage("minimessage", MiniMessageFeature.class),
 		osapi("osapi", OsapiFeature.class),
 		pubsub("pubsub", PubsubFeature.class),
+		pubsub2("pubsub-2", Pubsub2Feature.class),
 		rpc("rpc", RpcFeature.class),
 		setPrefs("setprefs", SetPrefsFeature.class),
 		setTitle("settitle", SetTitleFeature.class),
@@ -219,6 +221,18 @@ public interface GadgetFeature
 		 * @return PubsubFeature
 		 */
 		PubsubFeature getPubsubFeature();
+	}
+	
+	@NeedsFeatures({
+		@Feature(ContainerFeature.pubsub2)
+	})
+	public interface NeedsPubsub2Feature
+	{
+		/**
+		 * Returns the Pubsub2Feature. 
+		 * @return Pubsub2Feature
+		 */
+		Pubsub2Feature getPubsub2Feature();
 	}
 
 	@NeedsFeatures({
@@ -400,6 +414,18 @@ public interface GadgetFeature
 		 * @return PubsubFeature
 		 */
 		PubsubFeature getPubsubFeature();
+	}
+	
+	@WantsFeatures({
+		@Feature(ContainerFeature.pubsub2)
+	})
+	public interface WantsPubsub2Feature
+	{
+		/**
+		 * Returns the Pubsub2Feature. 
+		 * @return Pubsub2Feature
+		 */
+		Pubsub2Feature getPubsub2Feature();
 	}
 
 	@WantsFeatures({

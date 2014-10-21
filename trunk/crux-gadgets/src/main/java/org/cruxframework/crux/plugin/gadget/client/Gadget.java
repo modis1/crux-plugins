@@ -22,6 +22,7 @@ import org.cruxframework.crux.plugin.gadget.client.features.AdsFeature;
 import org.cruxframework.crux.plugin.gadget.client.features.DynamicHeightFeature;
 import org.cruxframework.crux.plugin.gadget.client.features.GoogleAnalyticsFeature;
 import org.cruxframework.crux.plugin.gadget.client.features.MiniMessageFeature;
+import org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature;
 import org.cruxframework.crux.plugin.gadget.client.features.PubsubFeature;
 import org.cruxframework.crux.plugin.gadget.client.features.RpcFeature;
 import org.cruxframework.crux.plugin.gadget.client.features.SetPrefsFeature;
@@ -75,6 +76,12 @@ public interface Gadget
 	 */
 	PubsubFeature getPubsubFeature();
 
+	/**
+	 * Returns the Pubsub2Feature. Your class must implement NeedsPubsub2FeatureFeature to retrieve this value. If does not, null will be returned
+	 * @return Pubsub2Feature
+	 */
+	Pubsub2Feature getPubsub2Feature();
+	
 	/**
 	 * Returns the RpcFeature. Your class must implement NeedsRpc to retrieve this value. If does not, null will be returned
 	 * @return RpcFeature
