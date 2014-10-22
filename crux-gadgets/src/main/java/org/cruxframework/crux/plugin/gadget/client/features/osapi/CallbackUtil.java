@@ -33,7 +33,7 @@ class CallbackUtil {
   static final native <T extends JavaScriptObject> JavaScriptObject getJsFunction(
       Callback<T> callback) /*-{
     return function(object) {
-      @org.cruxframework.crux.plugin.gadget.client.features.osapi.CallbackUtil::onDone(Lorg/cruxframework/crux/gadget/client/features/osapi/Callback;Lcom/google/gwt/core/client/JavaScriptObject;)(callback, object);
+      @org.cruxframework.crux.plugin.gadget.client.features.osapi.CallbackUtil::onDone(Lorg/cruxframework/crux/plugin/gadget/client/features/osapi/Callback;Lcom/google/gwt/core/client/JavaScriptObject;)(callback, object);
     };
   }-*/;
 
@@ -50,7 +50,6 @@ class CallbackUtil {
    * {@link Callback#onSuccess(JavaScriptObject)} method of the callback,
    * depending on the passed result.
    */
-  @SuppressWarnings("unused")
   private static <T extends JavaScriptObject> void onDone(Callback<T> callback,
       T result) {
     if (hasError(result)) {
