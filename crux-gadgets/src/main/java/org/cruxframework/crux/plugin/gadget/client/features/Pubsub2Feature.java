@@ -27,9 +27,9 @@ public interface Pubsub2Feature
 	 * @author Samuel Almeida Cardoso
 	 *
 	 */
-	interface Callback
+	interface Callback<T extends Object, Y extends Object>
 	{
-		void onMessage(String topic, String data, String subscriberData);
+		void onMessage(String channelName, T data, Y subscriberData);
 	}
 	
 	/**
@@ -38,7 +38,19 @@ public interface Pubsub2Feature
 	 * @param channelName
 	 * @param message
 	 */
-	void publish(String channelName, String message);
+	void publish(String channelName, Object message);
+
+	
+	/* -  -  -  -  -  -  -  -  -  -  -  -  */
+	void load(LoadCallback callback);
+	
+	boolean isConnected();
+	
+	interface LoadCallback
+	{
+		void onLoad();
+	}
+	/* -  -  -  -  -  -  -  -  -  -  -  -  */
 	
 	/**
 	 * Subscribes to the specified channel. Whenever any gadget publish some message to the channel, 
@@ -46,7 +58,7 @@ public interface Pubsub2Feature
 	 * @param channelName
 	 * @param callback
 	 */
-	void subscribe(String channelName, Callback callback);
+	void subscribe(String channelName, Callback<?, ?> callback);
   
 	/**
 	 * Unsubscribes from the specified channel. No more notifications will be received.
