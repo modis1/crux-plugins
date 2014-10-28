@@ -23,21 +23,53 @@ import org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature;
  */
 public class Pubsub2FeatureImpl implements Pubsub2Feature
 {
-	private Pubsub2FeatureImpl()
-	{
-	}
+	@Override
+	public native void load(final LoadCallback callback)/*-{
+	 	if($wnd.gadgets.Hub && $wnd.gadgets.Hub.isConnected())
+	 	{
+	 		callback.@org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature.LoadCallback::onLoad()();
+	 	} else
+	 	{
+		 	$wnd.gadgets.HubSettings.onConnected = function( hub, suc, err ) {
+				if(suc)
+				{
+					callback.@org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature.LoadCallback::onLoad()();
+				} else
+				{
+					console.log(err);
+					alert('ERROR! pubsub2 resource not loaded: ' + err)
+				}
+		 	};
+	 	
+			try {
+				$wnd.gadgets.Hub.connect( $wnd.gadgets.HubSettings.onConnected );
+			} catch(e) {
+				console.log(e);
+				alert('ERROR! pubsub2 resource not loaded: ' + e)
+			}
+		}
+	}-*/;
 	
-	public native void publish(String channelName, String message)/*-{
+	@Override
+	public native void publish(String channelName, Object message)/*-{
 	    $wnd.gadgets.Hub.publish(channelName, message);
     }-*/;
-
-	public native void subscribe(String channelName, Callback callback)/*-{
-	    $wnd.gadgets.Hub.subscribe(channelName, new function(topic, data, subscriberData){
-	       callback.@org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature.Callback::onMessage(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)(topic, data, subscriberData);
-	    });
+	
+	@Override
+	public native void subscribe(String channelName, Callback<?, ?> callback)/*-{
+		$wnd.gadgets.Hub.subscribe(channelName, 
+			function(topic, data, subscriberData) { 
+				callback.@org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature.Callback::onMessage(Ljava/lang/String; Ljava/lang/Object; Ljava/lang/Object;)(topic, data, subscriberData); 
+			} );
     }-*/;
 
+	@Override
 	public native void unsubscribe(String channelName)/*-{
 	    $wnd.gadgets.Hub.unsubscribe(channelName);
     }-*/;
+	
+	@Override
+	public native boolean isConnected()/*-{
+		return $wnd.gadgets.Hub.isConnected();
+	}-*/;
 }
