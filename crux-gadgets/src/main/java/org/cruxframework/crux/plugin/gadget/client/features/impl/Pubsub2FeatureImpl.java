@@ -17,6 +17,8 @@ package org.cruxframework.crux.plugin.gadget.client.features.impl;
 
 import org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature;
 
+import com.google.gwt.core.client.JavaScriptObject;
+
 /**
  * @author Samuel Almeida Cardoso
  *
@@ -51,7 +53,7 @@ public class Pubsub2FeatureImpl implements Pubsub2Feature
 	}-*/;
 	
 	@Override
-	public native void publish(String channelName, Object message)/*-{
+	public native <T extends JavaScriptObject> void publish(String channelName, T message)/*-{
 	    $wnd.gadgets.Hub.publish(channelName, message);
     }-*/;
 	
@@ -59,7 +61,7 @@ public class Pubsub2FeatureImpl implements Pubsub2Feature
 	public native void subscribe(String channelName, Callback<?, ?> callback)/*-{
 		$wnd.gadgets.Hub.subscribe(channelName, 
 			function(topic, data, subscriberData) { 
-				callback.@org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature.Callback::onMessage(Ljava/lang/String; Ljava/lang/Object; Ljava/lang/Object;)(topic, data, subscriberData); 
+				callback.@org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature.Callback::onMessage(Ljava/lang/String; Lcom/google/gwt/core/client/JavaScriptObject; Ljava/lang/Object;)(topic, data, subscriberData); 
 			} );
     }-*/;
 
