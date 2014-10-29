@@ -24,16 +24,16 @@ import org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature;
 public class Pubsub2FeatureImpl implements Pubsub2Feature
 {
 	@Override
-	public native void load(final LoadCallback callback)/*-{
+	public native void connect(final ConnectCallback callback)/*-{
 	 	if($wnd.gadgets.Hub && $wnd.gadgets.Hub.isConnected())
 	 	{
-	 		callback.@org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature.LoadCallback::onLoad()();
+	 		callback.@org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature.ConnectCallback::onConnected()();
 	 	} else
 	 	{
 		 	$wnd.gadgets.HubSettings.onConnected = function( hub, suc, err ) {
 				if(suc)
 				{
-					callback.@org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature.LoadCallback::onLoad()();
+					callback.@org.cruxframework.crux.plugin.gadget.client.features.Pubsub2Feature.ConnectCallback::onConnected()();
 				} else
 				{
 					console.log(err);
