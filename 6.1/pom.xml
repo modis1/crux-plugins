@@ -4,7 +4,7 @@
 	<groupId>org.cruxframework.plugin</groupId>
 	<artifactId>crux-gadgets</artifactId>
 	<name>Crux Gadgets - Development</name>
-	<version>6.1-SNAPSHOT</version>
+	<version>6.1</version>
 	<description>Crux Gadgets - Development components</description>
 
 	<parent>
