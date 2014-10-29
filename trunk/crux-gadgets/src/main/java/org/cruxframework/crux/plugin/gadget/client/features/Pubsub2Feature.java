@@ -33,6 +33,16 @@ public interface Pubsub2Feature
 	}
 	
 	/**
+	 * Handler that is fired when Gadget API is connected
+	 * @author samuel.cardoso
+	 *
+	 */
+	interface ConnectCallback
+	{
+		void onConnected();
+	}
+	
+	/**
 	 * Publish a message on the specified channel. All subscribers of the channel will be notified, 
 	 * through its Callback objects.
 	 * @param channelName
@@ -40,17 +50,16 @@ public interface Pubsub2Feature
 	 */
 	void publish(String channelName, Object message);
 
+	/**
+	 * Connect to Google Gadgets API.
+	 * @param callback
+	 */
+	void connect(ConnectCallback callback);
 	
-	/* -  -  -  -  -  -  -  -  -  -  -  -  */
-	void load(LoadCallback callback);
-	
+	/**
+	 * @return true if it's connected to Google Gadgets API and false otherwise.
+	 */
 	boolean isConnected();
-	
-	interface LoadCallback
-	{
-		void onLoad();
-	}
-	/* -  -  -  -  -  -  -  -  -  -  -  -  */
 	
 	/**
 	 * Subscribes to the specified channel. Whenever any gadget publish some message to the channel, 
