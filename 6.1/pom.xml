@@ -4,7 +4,7 @@
 	<groupId>org.cruxframework.plugin</groupId>
 	<artifactId>crux-gadgets-runtime</artifactId>
 	<name>Crux Gadgets - Runtime</name>
-	<version>6.1-SNAPSHOT</version>
+	<version>6.1</version>
 	<description>Crux Gadgets - Runtime components</description>
 
 	<parent>
