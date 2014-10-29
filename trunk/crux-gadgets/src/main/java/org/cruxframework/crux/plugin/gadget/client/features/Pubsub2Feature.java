@@ -15,6 +15,8 @@
  */
 package org.cruxframework.crux.plugin.gadget.client.features;
 
+import com.google.gwt.core.client.JavaScriptObject;
+
 
 /**
  * Provides access to the pubsub feature.
@@ -27,7 +29,7 @@ public interface Pubsub2Feature
 	 * @author Samuel Almeida Cardoso
 	 *
 	 */
-	interface Callback<T extends Object, Y extends Object>
+	interface Callback<T extends JavaScriptObject, Y extends Object>
 	{
 		void onMessage(String channelName, T data, Y subscriberData);
 	}
@@ -48,7 +50,7 @@ public interface Pubsub2Feature
 	 * @param channelName
 	 * @param message
 	 */
-	void publish(String channelName, Object message);
+	<T extends JavaScriptObject> void publish(String channelName, T message);
 
 	/**
 	 * Connect to Google Gadgets API.
