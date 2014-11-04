@@ -16,6 +16,8 @@
 package com.google.gwt.gadgets.client.gwtrpc;
 
 
+import org.cruxframework.crux.core.server.rest.util.HttpHeaderNames;
+
 import com.google.gwt.gadgets.client.io.IoProvider;
 import com.google.gwt.gadgets.client.io.MethodType;
 import com.google.gwt.gadgets.client.io.RequestOptions;
@@ -28,7 +30,7 @@ import com.google.gwt.http.client.RequestCallback;
  * {@link com.google.gwt.gadgets.client.io.GadgetsIo} for communication with the
  * server.
  */
-class GadgetsRequestBuilder extends RequestBuilder {
+public class GadgetsRequestBuilder extends RequestBuilder {
 
   /**
    * Creates a builder using the parameters for configuration.
@@ -91,7 +93,13 @@ class GadgetsRequestBuilder extends RequestBuilder {
   private GadgetsRequest doSend(String requestData,
       final RequestCallback callback) {
     final RequestOptions options = RequestOptions.newInstance();
-    options.setMethodType(MethodType.POST);
+    options.setMethodType(MethodType.valueOf(getHTTPMethod().toUpperCase()));
+    
+    if (!getHTTPMethod().toUpperCase().equals("GET"))
+	{
+		options.setHeader(HttpHeaderNames.XSRF_PROTECTION_HEADER, "1");
+	}
+    
     options.setPostData(requestData);
 
     final GadgetsRequest gadgetsRequest = new GadgetsRequest(
