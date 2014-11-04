@@ -21,6 +21,11 @@
 	<!-- Servlet used to handle RPC event calls.                -->
 	<servlet path="/crux.rpc" class="org.cruxframework.crux.plugin.gadget.server.dispatch.GadgetRemoteServiceServlet"/>
 
+    <!-- Specify the generator for REST stubs.                   -->
+    <generate-with class="org.cruxframework.crux.plugin.gadget.rebind.rest.CruxGadgetRestProxyGenerator">
+        <when-type-assignable class="org.cruxframework.crux.core.client.rest.RestProxy"/>
+    </generate-with>
+
 	<!-- Specify the generator for RPC stubs.                   -->
 	<generate-with class="org.cruxframework.crux.plugin.gadget.rebind.rpc.CruxGadgetServiceGenerator">
 		<when-type-assignable class="com.google.gwt.user.client.rpc.RemoteService"/>
